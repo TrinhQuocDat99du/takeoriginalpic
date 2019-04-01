@@ -1,26 +1,32 @@
 async function main()
 {
+    //puupeteer
     const pu = require('puppeteer');
     var brs = await pu.launch();
     const pg = await brs.newPage();
-    await pg.goto('https://www.instagram.com/nacucpin/?hl=en');
-
+    // URL = address trên insta
+    await pg.goto(' URL ');
+   
     const f =require('fs');
      if(!f.existsSync('./result'))
      {
          f.mkdirSync('./result');
      }
+    // truy cập các src,lọc các src
     const srcs=await pg.evaluate(() =>
     {const imgs = Array.from(document.querySelectorAll('article img'));
     const srcs = imgs.map(i => i.getAttribute('srcset'));
     return srcs;
     } ) 
+    //
     await brs.close();
     for(let i =0;i<srcs.length;i++)
     {
+    //cd dowloader
         const dl=require('image-dowloader');
             const sr = srcs[i];
             const s=sr.split(',');
+            //
             const rs =s[s.length - 1].split(' ')[0];
             dl( {           url: rs,       dest: './result'} )
 

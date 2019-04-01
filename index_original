@@ -19,7 +19,8 @@ async function main()
     for(let i =0;i<srcs.length;i++)
     {
         const dl=require('image-dowloader');
-            const sr = srcs[i]; const s=sr.split(',');
+            const sr = srcs[i];
+            const s=sr.split(',');
             const rs =s[s.length - 1].split(' ')[0];
             dl( {           url: rs,       dest: './result'} )
 
